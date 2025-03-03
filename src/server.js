@@ -49,14 +49,16 @@ const init = async () => {
     const registerService = new RegisterServices(pool)
 
     const server = Hapi.server({ 
-        port: 2000,
-        host: `localhost`,
+        port: 3000,
+        host: `0.0.0.0`,
         routes: {
             cors: {
-                origin: ['*']
+                origin: ['*'],
+                headers: ["Accept","Content-Type","Authorization"],
+                additionalHeaders: ["X-Requested-With"]
             }
         }
-    })
+    });
 
     await server.register(require('@hapi/inert'));
 
